@@ -12,7 +12,6 @@ public interface StudentMaintenanceDAO {
 	
 	public boolean updateStudent(StudentInfoBean studentInfoBean);
 	
-	public StudentInfoBean getGrade(int id);
 
 
 

@@ -1,3 +1,6 @@
+/* @Beanclass : StudentInfoBean
+ * @Description : Bean class to map database fields including userid,
+ * */
 package com.onebill.Spring.bean;
 
 import javax.persistence.Column;

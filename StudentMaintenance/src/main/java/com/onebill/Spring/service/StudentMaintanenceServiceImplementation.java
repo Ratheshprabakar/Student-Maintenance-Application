@@ -12,9 +12,29 @@ public class StudentMaintanenceServiceImplementation implements StudentMaintenan
 	@Autowired
 	StudentMaintenanceDAO dao;
 	
-	public boolean addStudent(StudentInfoBean studentInfoBean) {
-		
+	public boolean addStudent(StudentInfoBean studentInfoBean,double quaterlyMark,double halfYearlyMark,double AnnualMark) {
+		double aggregateMark = ((quaterlyMark + halfYearlyMark+ AnnualMark)/3)/10;
+		studentInfoBean.setMarks(aggregateMark);
+		studentInfoBean.setGrade(gradeCalculation(aggregateMark));
 		return dao.addStudent(studentInfoBean);		
+	}
+	
+	public String gradeCalculation(double aggregateMark) {
+		if(aggregateMark>=9.1 && aggregateMark<=10.0)
+			return "A+";
+		else if(aggregateMark>=8.1 && aggregateMark<=9.0)
+			return "A";
+		else if(aggregateMark>=7.1 && aggregateMark<=8.0)
+			return "B";
+		else if(aggregateMark>=6.1 && aggregateMark<=7.0)
+			return "C";
+		else if(aggregateMark>=5.1 && aggregateMark<=6.0)
+			return "D";
+		else if(aggregateMark>=4.1 && aggregateMark<=5.0)
+			return "E";
+		else
+			return "Fail";
+			
 	}
 
 	@Override
@@ -49,7 +69,15 @@ public class StudentMaintanenceServiceImplementation implements StudentMaintenan
 		if(id<0) {
 			return null;
 		}
-		return dao.getGrade(id);
+		return dao.searchStudent(id);
+	}
+
+	@Override
+	public StudentInfoBean getMark(int id) {
+		if(id<0) {
+			return null;
+		}
+		return dao.searchStudent(id);		
 	}
 
 }

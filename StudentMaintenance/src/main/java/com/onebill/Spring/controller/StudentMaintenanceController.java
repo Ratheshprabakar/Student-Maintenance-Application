@@ -20,13 +20,16 @@ public class StudentMaintenanceController {
 	@Autowired
 	StudentMaintenanceService service;
 
-	@PostMapping(path = "/add", produces = { MediaType.APPLICATION_JSON_VALUE,
+	@PostMapping(path = "/add/{m1}/{m2}/{m3}", produces = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE }, consumes = { MediaType.APPLICATION_JSON_VALUE,
 					MediaType.APPLICATION_XML_VALUE })
-	public StudentMaintenanceResponse insertStudent(@RequestBody StudentInfoBean studentInfoBean) {
+	public StudentMaintenanceResponse insertStudent(@PathVariable(name="m1") double m1, 
+			@PathVariable(name="m2") double m2, 
+			@PathVariable(name="m3") double m3,
+			@RequestBody StudentInfoBean studentInfoBean) {
 		StudentMaintenanceResponse response = new StudentMaintenanceResponse();
 
-		if (service.addStudent(studentInfoBean)) {
+		if (service.addStudent(studentInfoBean,m1,m2,m3)) {
 			response.setStatusCode(200);
 			response.setStatusMessage("Success");
 			response.setDescription("Successfully Inserted");
@@ -83,7 +86,6 @@ public class StudentMaintenanceController {
 			response.setStatusCode(200);
 			response.setStatusMessage("Success");
 			response.setDescription("Successfully Updated the email for ID " + studentInfoBean.getUserid());
-			response.setStudentInfoBean(studentInfoBean);
 		} else {
 			response.setStatusCode(404);
 			response.setStatusMessage("Failure");
@@ -91,6 +93,24 @@ public class StudentMaintenanceController {
 		}
 		return response;
 	} // End of Update Email Address for a student
+	
+	@GetMapping(path="/getMark/{id}", produces= {MediaType.APPLICATION_JSON_VALUE,
+			MediaType.APPLICATION_XML_VALUE})
+	public StudentMaintenanceResponse getAggregateMarks(@PathVariable(name="id") int id) {
+		
+		StudentMaintenanceResponse response = new StudentMaintenanceResponse();
+		StudentInfoBean studentInfoBean = service.getMark(id);
+		if (studentInfoBean!=null) {
+			response.setStatusCode(200);
+			response.setStatusMessage("Success");
+			response.setDescription("Aggregate Mark for " + studentInfoBean.getName()+" is "+studentInfoBean.getMarks());
+		} else {
+			response.setStatusCode(404);
+			response.setStatusMessage("Failure");
+			response.setDescription("Data not found with ID "+id);
+		}
+		return response;		
+	}
 	
 	@GetMapping(path="/getGrade/{id}", produces= {MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE})

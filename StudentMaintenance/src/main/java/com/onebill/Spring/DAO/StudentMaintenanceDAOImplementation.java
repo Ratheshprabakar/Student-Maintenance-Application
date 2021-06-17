@@ -3,7 +3,6 @@ package com.onebill.Spring.DAO;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
 import javax.persistence.PersistenceUnit;
 
 import org.springframework.stereotype.Repository;
@@ -92,19 +91,5 @@ public class StudentMaintenanceDAOImplementation implements StudentMaintenanceDA
 		}
 	}
 
-	@Override
-	public StudentInfoBean getGrade(int id) {
-		// TODO Auto-generated method stub
-		EntityManager manager = factory.createEntityManager();
-		try {
-			StudentInfoBean studentInfoBean = manager.find(StudentInfoBean.class, id);
-			return studentInfoBean;
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
-		}
-
-	}
 
 }
