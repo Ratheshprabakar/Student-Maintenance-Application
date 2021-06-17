@@ -1,4 +1,19 @@
+/*
+ * @Class : StudentMaintenanceController
+ * @Description : Rest Controller class to control all REST API's 
+ * @API's 
+ * 		1. To Insert a Student Data(path variables = quaterlyMark/halfYearlyMark/AnnualMark) -  /add/{quaterlyMark}/{halfYearlyMark}/{AnnualMark} 
+ * 		2. To Search a Student Data(path variable = id) - /search/{id}
+ * 		3. To Remove a Student Data(path variable = id) - /remove/{id}
+ * 		4. To Update student Email Address(request body = StudentInfoBean object contains id and email only) - /update
+ * 		5. To return Aggregate Marks(path variable = id) - /getMark/{id}
+ * 		6. To retrive Grade of the student(path variable = id) - /getGrade/{id}
+ * */
 package com.onebill.Spring.controller;
+
+/* @author : Rathesh Prabakar
+ * @version : 2.0 17/06/2021
+ * */
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -20,16 +35,16 @@ public class StudentMaintenanceController {
 	@Autowired
 	StudentMaintenanceService service;
 
-	@PostMapping(path = "/add/{m1}/{m2}/{m3}", produces = { MediaType.APPLICATION_JSON_VALUE,
+	@PostMapping(path = "/add/{quaterlyMark}/{halfYearlyMark}/{AnnualMark}", produces = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE }, consumes = { MediaType.APPLICATION_JSON_VALUE,
 					MediaType.APPLICATION_XML_VALUE })
-	public StudentMaintenanceResponse insertStudent(@PathVariable(name="m1") double m1, 
-			@PathVariable(name="m2") double m2, 
-			@PathVariable(name="m3") double m3,
+	public StudentMaintenanceResponse insertStudent(@PathVariable(name="quaterlyMark") double quaterlyMark, 
+			@PathVariable(name="halfYearlyMark") double halfYearlyMark, 
+			@PathVariable(name="AnnualMark") double AnnualMark,
 			@RequestBody StudentInfoBean studentInfoBean) {
 		StudentMaintenanceResponse response = new StudentMaintenanceResponse();
 
-		if (service.addStudent(studentInfoBean,m1,m2,m3)) {
+		if (service.addStudent(studentInfoBean,quaterlyMark,halfYearlyMark,AnnualMark)) {
 			response.setStatusCode(200);
 			response.setStatusMessage("Success");
 			response.setDescription("Successfully Inserted");

@@ -1,4 +1,18 @@
+/* @Class : StudentMaintenanceDAOImplementation
+ * @Description : Implementation class for all the DAO methods
+ * @PersistenceUnit : factory
+ * @Methods : 
+ * 		1. addStudent(StudentInfoBean studentInfoBean) - To Insert a Student Data
+ * 		2. searchStudent(int id) - To Search a Student data
+ * 		3. deleteStudent(int id) - To remove a student data
+ * 		4. updateStudent(StudentInfoBean studentInfoBean) - To update student email
+ * */
+
 package com.onebill.Spring.DAO;
+
+/* @author : Rathesh Prabakar
+ * @version : 2.0 17/06/2021
+ * */
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -15,6 +29,7 @@ public class StudentMaintenanceDAOImplementation implements StudentMaintenanceDA
 	@PersistenceUnit
 	EntityManagerFactory factory;
 	
+	//To Insert a Student Data
 	public boolean addStudent(StudentInfoBean studentInfoBean) {
 		// TODO Auto-generated method stub
 		EntityManager manager = factory.createEntityManager();
@@ -34,6 +49,7 @@ public class StudentMaintenanceDAOImplementation implements StudentMaintenanceDA
 		
 	}
 
+	//To Search a Student data
 	@Override
 	public StudentInfoBean searchStudent(int id) {
 		EntityManager manager = factory.createEntityManager();
@@ -50,6 +66,7 @@ public class StudentMaintenanceDAOImplementation implements StudentMaintenanceDA
 		
 	}
 
+	//To remove a student data
 	@Override
 	public boolean deleteStudent(int id) {
 		
@@ -70,6 +87,7 @@ public class StudentMaintenanceDAOImplementation implements StudentMaintenanceDA
 		}
 	}
 
+	//To update student email
 	@Override
 	public boolean updateStudent(StudentInfoBean studentInfoBean) {
 		
