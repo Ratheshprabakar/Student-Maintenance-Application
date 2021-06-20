@@ -1,6 +1,6 @@
 # Student-Maintenance-Application
 
-> Develop an application to store Student information using following services
+> Develop an RESTFUL application to store Student information using following services
 
 - Insert a Student data
 - Search a Student data
